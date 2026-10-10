@@ -7,6 +7,16 @@
 >
 > **本仓库不含任何音频。** 它是一个纯工具链。
 
+> ### 🙏 先说清楚：这个工具包是「为别人的作品而做」的
+>
+> 它产出的音频，是装配进 **[`dsh-startup-screen`](https://github.com/6shenhonghong9/dsh-startup-screen)**
+> —— 由 **[沈宏宏](https://github.com/6shenhonghong9)** 开发的 DSH 启动动画插件
+> （MIT 许可，`Copyright (c) 2026 沈宏宏`）。
+>
+> **那个插件不在本仓库里，版权归原作者。** 本工具包只与它对接、从不修改它的代码。
+> 完整第三方署名与许可状态见 **[NOTICE](NOTICE)**。
+> 如果你觉得本工具有用，请顺路也给那个插件点个 star。
+
 ---
 
 ## 起因：DSH 里藏着一整套语音工具链，但没人用
@@ -321,14 +331,52 @@ node tools/install-into-plugin.cjs --src=out --profile=desktop
 
 ---
 
+## 致谢
+
+本工具包**站在别人的作品上**。没有下面这些，它只是一堆数学函数。
+
+### [`dsh-startup-screen`](https://github.com/6shenhonghong9/dsh-startup-screen) —— 作者 [沈宏宏](https://github.com/6shenhonghong9)
+
+**这个工具包是为它而做的。** 我们所有的音频成品，最终都是装进这个插件里播的。
+
+它是本项目存在的前提：它定义了 6 幕的分镜结构、每幕的停留时长公式
+（`max(step.hold, audioMs + 240)`）、素材路由的约定、以及整套"交互式访问授权序列"的设计。
+我们做的事情只有一件 —— **把声音做好然后塞进去**。
+
+- 许可：MIT（`Copyright (c) 2026 沈宏宏`）
+- 本仓库**不包含**它的任何源码；`tools/install-into-plugin.cjs` 只往它的 `lib/assets/` 里复制音频，从不改它的代码
+- `docs/` 里为说明互操作性，引用了它的**少量代码片段**（素材路由白名单、停留时长公式等），这些片段版权仍归原作者
+
+> ⚠️ **如果你修改了它的代码并打算再分发**，MIT 要求你保留原作者的版权声明和许可证全文。
+> 更好的做法是**把改动贡献回上游**（提 PR）—— 本工具包当初的 `ID CONFIRMED` 位置修正就是这类改动。
+
+### [`sherpa-onnx`](https://github.com/k2-fsa/sherpa-onnx) —— 作者 k2-fsa
+
+本项目全部的语音能力都来自它：离线 ASR、TTS、**ZipVoice 零样本克隆**、说话人识别、降噪、VAD。
+
+- 许可：Apache-2.0
+- 本仓库**不分发**它 —— 它就在 DeepSeek Harness 的安装目录里（`app.asar.unpacked`）。
+  我们做的事只是"发现它原来一直在那儿"
+
+### 模型文件
+
+| 模型 | 用途 | 上游项目 |
+|---|---|---|
+| `sherpa-onnx-whisper-tiny.en` | ASR 逐段校验 | Whisper（MIT）|
+| `sherpa-onnx-zipvoice-distill-int8-zh-en-emilia` | 零样本克隆 | ZipVoice（Apache-2.0）|
+| `vocos_24khz.onnx` | 声码器 | Vocos（MIT）|
+
+由 `scripts/download-models.*` 从官方发布页下载，**不入库**。
+
+### DeepSeek Harness
+
+本工具包面向它编写。**与 DeepSeek 官方无隶属关系，也未被其背书。**
+
+---
+
 ## 许可
 
-MIT。见 [LICENSE](LICENSE)。
-
-配套插件 [`dsh-startup-screen`](https://github.com/6shenhonghong9/dsh-startup-screen) 由
-**沈宏宏**开发（MIT），本工具包只与它对接，不包含它的代码。
-`sherpa-onnx` 由 [k2-fsa](https://github.com/k2-fsa/sherpa-onnx) 开发（Apache-2.0），
-本工具包**不分发**它，只调用 DSH 已随附的副本。
+MIT。见 [LICENSE](LICENSE) —— 第三方署名与许可状态见 [NOTICE](NOTICE)。
 
 ---
 

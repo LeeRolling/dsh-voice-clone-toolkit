@@ -8,6 +8,18 @@
 >
 > **This repository contains no audio of any kind.** It is a toolchain.
 
+> ### 🙏 Credit where it is due — this toolkit is built *for* someone else's work
+>
+> The audio it produces is assembled into
+> **[`dsh-startup-screen`](https://github.com/6shenhonghong9/dsh-startup-screen)**,
+> the DSH boot-animation plugin by **[沈宏宏](https://github.com/6shenhonghong9)**
+> (MIT, `Copyright (c) 2026 沈宏宏`).
+>
+> **That plugin is not in this repository, and its copyright belongs to its author.**
+> This toolkit only integrates with it and never modifies its code.
+> Full third-party attributions and license status: **[NOTICE](NOTICE)**.
+> If this toolkit helps you, please go star that plugin too.
+
 ---
 
 ## The discovery: DSH already ships a complete speech stack
@@ -330,14 +342,61 @@ please open an issue / PR — this pitfalls list was built one real crash at a t
 
 ---
 
+## Credits
+
+This toolkit **stands on other people's work.** Without the following, it would be
+nothing but a pile of math functions.
+
+### [`dsh-startup-screen`](https://github.com/6shenhonghong9/dsh-startup-screen) — by [沈宏宏](https://github.com/6shenhonghong9)
+
+**This toolkit exists to serve that plugin.** Every finished audio file we produce ends
+up playing inside it.
+
+It is the premise of this whole project: it defines the six-scene structure, the
+scene-duration formula (`max(step.hold, audioMs + 240)`), the asset-route conventions,
+and the entire "interactive access-authorization sequence" design. All we did was
+**make the voice good and put it in.**
+
+- License: MIT (`Copyright (c) 2026 沈宏宏`)
+- This repository contains **none** of its source code. `tools/install-into-plugin.cjs`
+  only copies audio into its `lib/assets/`; it never touches its code
+- `docs/` quotes a **few short code excerpts** from it (the asset-route allowlist, the
+  scene-duration formula) purely to explain interoperability. Those excerpts remain
+  the copyright of the original author
+
+> ⚠️ **If you modify its code and intend to redistribute it**, MIT requires you to keep
+> the original copyright notice and license text. The better move is to **contribute the
+> change upstream** (open a PR) — that is exactly what our `ID CONFIRMED` position fix
+> should become.
+
+### [`sherpa-onnx`](https://github.com/k2-fsa/sherpa-onnx) — by k2-fsa
+
+Every speech capability here comes from it: offline ASR, TTS, **ZipVoice zero-shot
+cloning**, speaker embedding, denoising, VAD.
+
+- License: Apache-2.0
+- This repository does **not** redistribute it — it is already inside the DeepSeek
+  Harness installation (`app.asar.unpacked`). All we did was *notice it was there*
+
+### Models
+
+| Model | Purpose | Upstream |
+|---|---|---|
+| `sherpa-onnx-whisper-tiny.en` | ASR verification | Whisper (MIT) |
+| `sherpa-onnx-zipvoice-distill-int8-zh-en-emilia` | Zero-shot cloning | ZipVoice (Apache-2.0) |
+| `vocos_24khz.onnx` | Vocoder | Vocos (MIT) |
+
+Downloaded by `scripts/download-models.*` from the official releases; **not** committed.
+
+### DeepSeek Harness
+
+This toolkit targets it. **It is not affiliated with, or endorsed by, DeepSeek.**
+
+---
+
 ## License
 
-MIT. See [LICENSE](LICENSE).
-
-Companion plugin [`dsh-startup-screen`](https://github.com/6shenhonghong9/dsh-startup-screen)
-by **沈宏宏** (MIT) — this toolkit only integrates with it, it does not include its code.
-`sherpa-onnx` by [k2-fsa](https://github.com/k2-fsa/sherpa-onnx) (Apache-2.0) —
-this toolkit does **not** redistribute it, it calls the copy DSH already ships.
+MIT. See [LICENSE](LICENSE) — third-party attributions and license status in [NOTICE](NOTICE).
 
 ---
 

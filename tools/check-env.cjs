@@ -113,7 +113,8 @@ console.log(`  ${ok} 项通过 / ${fail} 项缺失\n`)
 if (fail) {
   console.log('  下一步：')
   console.log('    1. 装模型：  powershell -ExecutionPolicy Bypass -File scripts/download-models.ps1')
-  console.log('    2. 装插件：  dsh plugin --profile <profile> add github:<owner>/dsh-startup-screen')
+  console.log('    2. 装插件：  dsh plugin --profile <profile> add github:6shenhonghong9/dsh-startup-screen')
+  console.log('                 （dsh-startup-screen · 作者 沈宏宏 · MIT —— 本工具包是为它而做的，请给个 star）')
   console.log('    3. 再跑一次：node tools/check-env.cjs\n')
 } else {
   console.log('  环境就绪，可以开始：见 README 的「快速开始」\n')

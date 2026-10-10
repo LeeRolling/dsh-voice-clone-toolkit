@@ -1,0 +1,79 @@
+DSH Voice Clone Toolkit
+Copyright (c) 2026 LeeRolling
+
+=============================================================================
+本仓库是一个工具链，不含任何音频。下面列出它对接的第三方作品与版权归属。
+This repository is a toolchain and contains no audio. Third-party works it
+integrates with are listed below.
+=============================================================================
+
+
+1. dsh-startup-screen
+-----------------------------------------------------------------------------
+  作者 / Author : 沈宏宏
+  许可 / License: MIT
+  版权 / Copyright (c) 2026 沈宏宏
+  来源 / Source : https://github.com/6shenhonghong9/dsh-startup-screen
+
+  关系：本工具包产出的音频是为这个插件做的。
+  Relation: the plugin this toolkit produces audio for.
+
+  状态 / Status:
+    · 未再分发 / NOT redistributed —— 本仓库不包含 dsh-startup-screen 的任何源码。
+    · tools/install-into-plugin.cjs 只是把生成的音频复制到用户本机的
+      <profile>/node_modules/dsh-startup-screen/lib/assets/，从不修改插件代码。
+    · docs/ 下的文档为了说明互操作性，引用了该插件的**少量代码片段**
+      （例如素材路由白名单、每幕停留时长公式）。这些片段仍属 MIT 许可，
+      版权归 沈宏宏。
+
+  ⚠️ 如果你修改了本机的 dsh-startup-screen，MIT 要求你在**再分发**时
+     保留其版权声明与许可证全文。
+     If you modify your local copy, MIT requires that you keep its copyright
+     notice and license text in any copy you redistribute.
+
+
+2. sherpa-onnx
+-----------------------------------------------------------------------------
+  作者 / Author : k2-fsa
+  许可 / License: Apache-2.0
+  来源 / Source : https://github.com/k2-fsa/sherpa-onnx
+
+  关系：语音运行时（ASR + ZipVoice 零样本克隆）。
+  Relation: the speech runtime (ASR + ZipVoice zero-shot cloning).
+
+  状态 / Status:
+    · 未再分发 / NOT redistributed —— 本工具包**不携带** sherpa-onnx，
+      而是加载 DeepSeek Harness 自身安装目录里已随附的原生模块。
+      This toolkit ships no sherpa-onnx binaries; it loads the native addon
+      already bundled inside the DeepSeek Harness installation.
+
+
+3. 模型文件 / Model files
+-----------------------------------------------------------------------------
+  由 scripts/download-models.* 从官方 GitHub Release 下载，**不入库**。
+  Downloaded by scripts/download-models.* from the official releases; NOT
+  included in this repository.
+
+    sherpa-onnx-whisper-tiny.en.tar.bz2                 ASR      → Whisper, MIT
+    sherpa-onnx-zipvoice-distill-int8-zh-en-emilia      TTS      → ZipVoice, Apache-2.0
+    vocos_24khz.onnx                                    Vocoder  → Vocos, MIT
+
+  （许可信息请以上游项目为准。/ Verify licenses at the upstream projects.）
+
+
+4. DeepSeek Harness
+-----------------------------------------------------------------------------
+  本工具包面向 DeepSeek Harness 编写，与 DeepSeek 官方**无隶属关系**，
+  也未被其背书。本仓库不再分发其任何代码。
+  This toolkit targets DeepSeek Harness. It is not affiliated with, or endorsed
+  by, DeepSeek. No DeepSeek Harness code is redistributed here.
+
+
+5. 音频 / Audio
+-----------------------------------------------------------------------------
+  本仓库**不含任何音频文件，也不含任何声音数据**。
+  This repository contains NO audio files and NO voice data of any kind.
+
+  使用权归使用者：你必须对你所用声音持有合法权利。
+  Rights are the user's responsibility: you must hold valid rights to any voice
+  you process or clone with this toolkit.
