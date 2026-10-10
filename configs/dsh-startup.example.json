@@ -1,0 +1,29 @@
+{
+  "_comment": "fx-apply 的会话配置示例。把 src 换成你自己的切片路径即可。",
+  "name": "dsh-startup-screen",
+
+  "preset": {
+    "hp": 220,
+    "ring": { "f": 48, "mix": 0.42 },
+    "comb": { "ms": 1.4, "g": 0.3 },
+    "lp": 3800,
+    "drive": 3.4,
+    "hold": 2,
+    "bits": 10,
+    "targetPeak": 0.7
+  },
+
+  "_sceneHold": "插件 splash.js 里每一步的 step.hold（视觉基准，毫秒）——用于反推该幕实际停留时间",
+  "sceneHold": { "line-1": 900, "line-2": 700, "line-3": 1200, "line-4": 1200, "line-5": 1600 },
+  "builtinTail": 240,
+
+  "_padding": "lead = 说话前的留白；tail = 说完后的留白。幕间连播的那几幕把两边都设 0。",
+  "lines": [
+    { "id": "line-1", "src": "work/segments/seg-01.wav", "text": "Access permission required.",   "lead": 0.5, "tail": 1.7 },
+    { "id": "line-2", "src": "work/segments/seg-02.wav", "text": "Identity verification.",          "lead": 0.0, "tail": 1.9 },
+    { "id": "line-3", "src": "work/segments/seg-03.wav", "text": "Access request received.",        "lead": 0.0, "tail": 0.0 },
+    { "id": "line-4", "src": "work/segments/seg-04.wav", "text": "Beginning permission read.",      "lead": 0.0, "tail": 0.0 },
+    { "id": "line-5", "src": "work/segments/seg-05.wav", "text": "Read complete. Verification passed.", "lead": 0.0, "tail": 0.0 },
+    { "id": "line-6", "src": "work/segments/seg-06.wav", "text": "Welcome to DeepSeek Harness.",    "lead": 0.8, "tail": 0.5 }
+  ]
+}

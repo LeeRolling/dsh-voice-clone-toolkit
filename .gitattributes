@@ -1,0 +1,9 @@
+# 统一换行符 —— shell 脚本必须 LF，否则在 macOS/Linux 上会报 \r 错误
+* text=auto eol=lf
+
+*.ps1 text eol=crlf
+*.sh  text eol=lf
+*.wav binary
+*.mp3 binary
+*.onnx binary
+*.node binary

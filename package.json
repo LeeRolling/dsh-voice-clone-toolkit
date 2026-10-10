@@ -1,0 +1,31 @@
+{
+  "name": "dsh-voice-clone-toolkit",
+  "version": "1.0.0",
+  "description": "Local, zero-cost voice cloning and mechanical voice effects for DeepSeek Harness — built on the sherpa-onnx runtime that DSH already ships. No audio files included.",
+  "private": true,
+  "type": "commonjs",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node tools/check-env.cjs",
+    "models": "powershell -ExecutionPolicy Bypass -File scripts/download-models.ps1",
+    "segment": "node tools/segment-audio.cjs",
+    "align": "node tools/asr-align.cjs",
+    "fx-lab": "node tools/fx-lab.cjs",
+    "fx-apply": "node tools/fx-apply.cjs",
+    "clone": "node tools/generate-clone.cjs",
+    "install": "node tools/install-into-plugin.cjs"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "sherpa-onnx",
+    "voice-clone",
+    "zero-shot-tts",
+    "zipvoice",
+    "whisper",
+    "dsp"
+  ]
+}

@@ -1,0 +1,10 @@
+# 台词清单示例（一行一句，# 开头是注释）
+# asr-align.cjs 和 generate-clone.cjs 都读这个格式。
+# 顺序不重要 —— asr-align 按**内容**匹配，不按位置。
+
+Access permission required.
+Identity verification.
+Access request received.
+Beginning permission read.
+Read complete. Verification passed.
+Welcome to DeepSeek Harness.

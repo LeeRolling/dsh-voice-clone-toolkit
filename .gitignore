@@ -1,0 +1,15 @@
+# 模型与产物一律不入库 —— 本仓库只放代码与文档
+models/
+work/
+out/
+*.wav
+*.mp3
+*.onnx
+*.tar.bz2
+*.node
+
+# 依赖/日志
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
