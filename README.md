@@ -1,5 +1,7 @@
 # DSH Voice Clone Toolkit
 
+**中文** | [English](README.en.md)
+
 > 用 **DeepSeek Harness 自带**的 `sherpa-onnx`，在本机零成本完成
 > 音色克隆 + 机械音效 + 分幕配音装配 —— 全离线，不花钱，不上传声音。
 >
@@ -171,7 +173,8 @@ node tools/install-into-plugin.cjs --src=out --profile=desktop
 
 ## 踩坑表（精华）
 
-完整版见 **[docs/PITFALLS.md](docs/PITFALLS.md)** —— 30 条真实踩过的坑，含原始报错。
+完整版见 **[docs/PITFALLS.md](docs/PITFALLS.md)**（中文）· **[docs/PITFALLS.en.md](docs/PITFALLS.en.md)**（English）
+—— 30 条真实踩过的坑，含原始报错。
 
 几条最容易翻车的：
 
@@ -185,6 +188,82 @@ node tools/install-into-plugin.cjs --src=out --profile=desktop
 | 换完音频没变化 | 素材响应带 `Cache-Control: max-age=86400` → 必须硬刷新 |
 | 安静时底噪"突然没了"很出戏 | 底噪写在文件里 → 幕间是数字静音；要改成**全局底噪床** |
 | 手工加了 patch 行后启动失败 | 插件被注册两次，同一路径重复注册 |
+
+---
+
+## 自定义动画的文字与语言
+
+**你不需要本工具包、也不需要任何音频**，就能改掉开机动画的屏幕文字和播报语言。
+下面把「能改什么、在哪改」列清楚。
+
+### 1. 设置页就能改（不用写代码）
+
+存在 `~/.dsh/dsh-startup.json`，也可以在插件设置页里改：
+
+```jsonc
+{
+  "identity":   "JOYCE MOORE",   // 屏幕上显示的身份名称
+  "identityId": "0087",          // 编号牌
+  "accessLevel": "3",            // 权限等级
+  "brand1": "DEEPSEEK",
+  "brand2": "SYNTHESIZE INTELLIGENCE",
+  "brand3a": "HARNESS",
+  "brand3b": "OS",
+  "orgZh":  "深度求索",           // ← 默认配置里唯一的中文，老外要改的就是它
+  "orgEn":  "DEEPSEEK",
+  "orgSub": "DEEPSEEK HARNESS",
+  "welcomeBox": "DEEPSEEK HARNESS",
+  "footer": "POWERED BY DEEPSEEK",
+  "accent": "#ff7500", "glitchA": "#ff3b30", "glitchB": "#2971b8"
+}
+```
+
+### 2. 那 5 句大标题的中文，要改一行代码
+
+动画是**双语**设计：每一幕同时显示「中文大标题」+「英文小标题」。它们在插件里：
+
+```
+<profile>/node_modules/dsh-startup-screen/lib/splash.js
+    var STEPS = [
+      { zh: '需要访问许可', en: 'ACCESS PERMISSION REQUIRED',
+        say: 'Access permission required.', log: '等待用户授权…', logEn: 'AWAITING OPERATOR CONSENT', ... },
+      ...
+```
+
+| 字段 | 作用 |
+|---|---|
+| `zh` | 大标题（默认中文）|
+| `en` | 大写英文标题 |
+| `say` | **念出来的那句** |
+| `log` / `logEn` | 底部小字 |
+
+要做纯非中文界面，把 5 个 `zh` 换掉或清空即可。
+（设置页不暴露这几个，是因为插件把它们当作固定的分镜编排。）
+
+### 3. 不用录音也能换播报语言
+
+```jsonc
+{
+  "voiceSource": "tts",     // asset = 用 lib/assets/line-*.mp3 ; tts = 用系统语音合成
+  "voiceLang":   "en",      // en | zh | both
+  "voiceRate":   0.88,      // 比正常朗读慢 —— 字与字之间才有重量
+  "voicePitch":  0.85,      // 压低音调，深沉的 AI 女声
+  "voiceName":   ""         // '' = 自动挑；也可以指定系统里的某个音色
+}
+```
+
+`voiceSource` 设成 `"tts"` 时，插件走 **Web Speech API**，用你系统里现有的音色、
+按你设的语言念。**完全不需要任何音频素材** —— 所以老外不用克隆任何东西，
+就能把这个插件换成自己的语言。
+
+### 4. 配色与节奏
+
+```jsonc
+{ "speed": 0.9, "soundVolume": 0.5, "voiceVolume": 0.6,
+  "accent": "#ff7500", "glitchA": "#ff3b30", "glitchB": "#2971b8" }
+```
+
+注意 `voiceVolume` 在 `0.735` 以上是死区（见踩坑表），有效范围是 0 ~ 0.735。
 
 ---
 
