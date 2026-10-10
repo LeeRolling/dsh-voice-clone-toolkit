@@ -366,8 +366,10 @@ and the entire "interactive access-authorization sequence" design. All we did wa
 
 > ⚠️ **If you modify its code and intend to redistribute it**, MIT requires you to keep
 > the original copyright notice and license text. The better move is to **contribute the
-> change upstream** (open a PR) — that is exactly what our `ID CONFIRMED` position fix
-> should become.
+> change upstream** (open a PR). Our local `ID CONFIRMED` position fix is exactly that
+> kind of general improvement — the ready-to-apply patch and a ready-to-paste PR body
+> are in **[docs/UPSTREAM-PR.md](docs/UPSTREAM-PR.md)**, which also itemizes
+> **everything we changed in our local copy of the plugin** (for transparency).
 
 ### [`sherpa-onnx`](https://github.com/k2-fsa/sherpa-onnx) — by k2-fsa
 

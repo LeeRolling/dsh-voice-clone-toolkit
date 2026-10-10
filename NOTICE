@@ -46,6 +46,12 @@ integrates with are listed below.
       而是加载 DeepSeek Harness 自身安装目录里已随附的原生模块。
       This toolkit ships no sherpa-onnx binaries; it loads the native addon
       already bundled inside the DeepSeek Harness installation.
+    · 文档中推荐安装官方 JS 包装包 `sherpa-onnx-node`（同一作者 k2-fsa，
+      Apache-2.0），用于阅读它如何把选项对象透传给原生插件。
+      本仓库既不依赖它、也不包含它。
+      The docs recommend installing the official JS wrapper `sherpa-onnx-node`
+      (same authors, Apache-2.0) to read how it forwards options to the addon.
+      This repository neither depends on nor includes it.
 
 
 3. 模型文件 / Model files
@@ -59,6 +65,56 @@ integrates with are listed below.
     vocos_24khz.onnx                                    Vocoder  → Vocos, MIT
 
   （许可信息请以上游项目为准。/ Verify licenses at the upstream projects.）
+
+
+3b. 网络镜像服务 / Network mirror services
+-----------------------------------------------------------------------------
+  文档里推荐的下载通道，均为第三方公共服务，与本项目**无隶属关系**、
+  不作任何可用性担保：
+  Download channels recommended in the docs. All are third-party public
+  services, not affiliated with this project, provided with no guarantee:
+
+    gh-proxy.com        代理 GitHub Release 资产 / proxies GitHub release assets
+    hf-mirror.com       HuggingFace 镜像 / HuggingFace mirror
+    modelscope.cn       ModelScope 镜像 / ModelScope mirror
+
+  它们只被 `scripts/download-models.*` 与文档引用，仓库不含其任何代码。
+  Referenced only by scripts and docs; no code from them is included.
+
+
+3c. 文档中引用的第三方代码片段（逐条列出）
+     Third-party code excerpts quoted in the docs (itemized)
+-----------------------------------------------------------------------------
+  为说明互操作性，docs/PITFALLS.md 与 docs/PITFALLS.en.md 引用了
+  **dsh-startup-screen**（MIT，版权归 沈宏宏）的少量代码片段。
+  这些片段的版权仍归原作者，此处逐条标明出处：
+  The pitfalls docs quote a few short excerpts from dsh-startup-screen
+  (MIT, copyright 沈宏宏). Those excerpts remain the original author's
+  copyright. Listed explicitly below:
+
+    · 每幕停留时长公式 / scene-duration formula
+        Math.max(ms(step.hold), (spoken || 0) + ms(240))
+        PITFALLS.md "D3"  /  PITFALLS.en.md "D3"
+
+    · 素材路由白名单 / asset-route allowlist
+        if (!/^[a-z0-9._-]+\.mp3$/i.test(name) || name.includes('..')) { 404 }
+        res.writeHead(200, { 'Content-Type': 'audio/mpeg', ... }); res.end(bytes)
+        PITFALLS.md "G3"  /  PITFALLS.en.md "G3"
+
+    · 语音增益公式 / voice gain formula
+        g.gain.value = Math.min(1, 0.85 * clamp01(C.voiceVolume, 0, 1) * 1.6)
+        PITFALLS.md "G4"  /  PITFALLS.en.md "G4"
+
+    · 分镜数组结构 / STEPS array shape（zh / en / say / log / logEn 五个字段的用途）
+        README.md「自定义动画的文字与语言」
+        README.en.md "Localize / customize the animation"
+
+    · 可配置字段名清单 / the list of configurable field names
+        （identity / brand* / org* / welcomeBox / footer / voiceName …）
+        同上两节 / same two sections
+
+  未引用其任何其他源码。本仓库不包含该插件的完整文件。
+  No other source is quoted, and no complete file from that plugin is included.
 
 
 4. DeepSeek Harness
